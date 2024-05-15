@@ -19,7 +19,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   void initState() {
     super.initState();
     // username.text = 'flesslie2q';
-    password.text = 'XUKU613LscMS';
+    // password.text = 'XUKU613LscMS';
   }
 
   @override
@@ -85,6 +85,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                     SizedBox(
                       width: 250,
                       child: TextField(
+                        onTap: () {
+                          password.text = 'XUKU613LscMS';
+                        },
                         decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.lock_outline,
                               size: 30, color: Colors.grey),
