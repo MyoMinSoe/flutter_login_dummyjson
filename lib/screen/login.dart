@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_dummyjson/screen/product_list.dart';
+import 'package:flutter_login_dummyjson/screen/home_screen.dart';
 import 'package:flutter_login_dummyjson/service/api_service.dart';
 import 'package:flutter_login_dummyjson/utility/my_shared_preference.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -136,6 +136,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ),
                   onPressed: () async {
                     var response = await logIn(username.text, password.text);
+
                     if (response == null) {
                       showDialog(
                           context: context,
@@ -147,8 +148,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                     } else {
                       MySharedPreference.setToken(response.token);
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const ProductScreen()));
+                          builder: (context) => HomeScreen(
+                                myLoginModel: response,
+                              )));
                     }
+                    setState(() {});
                   },
                   child: const Text('Login'),
                 ),
