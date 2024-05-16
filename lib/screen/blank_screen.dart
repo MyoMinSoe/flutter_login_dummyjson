@@ -5,16 +5,11 @@ class BlankScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Blank Screen'),
-      ),
-      body: const Center(
-        child: Text(
-          'ဘာမှမရှိပါ 😋',
-          style: TextStyle(
-              fontSize: 50, fontWeight: FontWeight.w900, color: Colors.grey),
-        ),
+    return const Center(
+      child: Text(
+        'ဘာမှမရှိပါ😋😋',
+        style: TextStyle(
+            fontSize: 50, fontWeight: FontWeight.w900, color: Colors.grey),
       ),
     );
   }

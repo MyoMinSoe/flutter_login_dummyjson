@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_dummyjson/model/login_model.dart';
 import 'package:flutter_login_dummyjson/screen/blank_screen.dart';
-import 'package:flutter_login_dummyjson/widgets/product_list.dart';
+import 'package:flutter_login_dummyjson/widgets/home_widget.dart';
 import 'package:flutter_login_dummyjson/screen/search_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -57,7 +57,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       body: PageView(
         controller: _pageController,
         children: [
-          ProductList(myLoginModel: widget.myLoginModel),
+          HomeWidget(loginModel: widget.myLoginModel),
           const SearchScreen(),
           const BlankScreen(),
           const BlankScreen(),
@@ -99,6 +99,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
             _pageController.animateToPage(index,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut);
+
+            if (mounted) {
+              setState(() {});
+            }
+            setState(() {});
           },
         ),
       ),
