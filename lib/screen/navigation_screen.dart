@@ -56,6 +56,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
       ),
       body: PageView(
         controller: _pageController,
+        onPageChanged: (value) {
+          _currentIndex = value;
+          if (mounted) {
+            setState(() {});
+          }
+        },
         children: [
           HomeWidget(loginModel: widget.myLoginModel),
           const SearchScreen(),

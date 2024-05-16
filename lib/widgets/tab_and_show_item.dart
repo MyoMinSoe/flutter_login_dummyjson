@@ -1,6 +1,5 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../model/product_model.dart';
 import 'package:flutter_login_dummyjson/service/api_service.dart';
@@ -14,15 +13,11 @@ class TabAndShowItem extends StatefulWidget {
 
 class _TabAndShowItemState extends State<TabAndShowItem>
     with TickerProviderStateMixin {
-  bool isFavourite = false;
-  Icon favouriteIcon = const Icon(
-    Icons.favorite_outline,
-    color: Colors.black38,
-    size: 40,
-  );
   late TabController tabController;
 
   final scrollController = ScrollController();
+  final myController = ScrollController();
+
   List<ProductElement> productList = [];
   int skip = 0;
   int total = 0;
@@ -65,14 +60,27 @@ class _TabAndShowItemState extends State<TabAndShowItem>
         getProductList();
       }
     });
+    myController.addListener(() {
+      if (myController.offset == myController.position.maxScrollExtent) {
+        getProductList();
+      }
+    });
+
     tabController = TabController(length: 7, vsync: this);
   }
+
+  bool isFavourite = false;
+  Icon favouriteIcon = const Icon(
+    Icons.favorite_outline,
+    color: Colors.black38,
+    size: 25,
+  );
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.8,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -171,59 +179,110 @@ class _TabAndShowItemState extends State<TabAndShowItem>
             ),
           ),
 //Recommended For You and Items//***********************************************
-          const Text(
-            'Recommended for you',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+          const Row(
+            children: [
+              Text(
+                'Recommended for you',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700),
+              ),
+              Spacer()
+            ],
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  width: MediaQuery.of(context).size.width * 0.45,
+            height: MediaQuery.of(context).size.height * 0.42,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              controller: myController,
+              itemCount: productList.length,
+              itemBuilder: (BuildContext context, int index) {
+                if (productList.length - 1 == index && isLoading) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return Container(
                   margin: const EdgeInsets.only(right: 25),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.black12,
-                  ),
+                  height: MediaQuery.of(context).size.height * 0.42,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.black12,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    if (isFavourite == false) {
+                                      isFavourite == true;
+                                      favouriteIcon = const Icon(
+                                        Icons.favorite,
+                                        color: Color.fromARGB(255, 223, 52, 94),
+                                        size: 25,
+                                      );
+                                    } else if (isFavourite == true) {
+                                      isFavourite == false;
+                                      favouriteIcon = const Icon(
+                                        Icons.favorite_outline,
+                                        color: Colors.black38,
+                                        size: 25,
+                                      );
+                                    }
+                                    if (mounted) {
+                                      setState(() {});
+                                    }
+                                  },
+                                  icon: favouriteIcon,
+                                ),
+                              ],
+                            ),
+                            Image.network(
+                              productList[index].thumbnail,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.12,
+                              fit: BoxFit.fitWidth,
+                            )
+                          ],
+                        ),
+                      ),
                       Row(
                         children: [
-                          const Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: favouriteIcon,
+                          Text(
+                            productList[index].brand,
+                            style: const TextStyle(fontSize: 15),
                           ),
+                          const Spacer()
                         ],
                       ),
-                      Image.network(
-                        productList[0].thumbnail,
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        height: MediaQuery.of(context).size.height * 0.12,
-                        fit: BoxFit.fitWidth,
-                      )
+                      Row(
+                        children: [
+                          Text(
+                            '\$${productList[index].price}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Spacer()
+                        ],
+                      ),
                     ],
                   ),
-                ),
-                Text(
-                  'title',
-                  style: TextStyle(fontSize: 15),
-                ),
-                Text(
-                  '\$458',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+                );
+              },
             ),
-          )
+          ),
         ],
       ),
     );
