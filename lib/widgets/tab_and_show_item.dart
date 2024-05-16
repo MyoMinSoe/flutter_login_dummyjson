@@ -274,7 +274,7 @@ class _TabAndShowItemState extends State<TabAndShowItem>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Spacer()
+                          const Spacer(),
                         ],
                       ),
                     ],
