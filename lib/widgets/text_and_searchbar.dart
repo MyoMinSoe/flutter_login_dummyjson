@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_login_dummyjson/model/login_model.dart';
+import 'package:flutter_login_dummyjson/screen/search_screen.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -27,35 +29,35 @@ class _TextAndSearchBarState extends State<TextAndSearchBar> {
           ),
           const Text(
             'Choose Your Favourite Product',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-//SearchBar*****************************************************
-          const SizedBox(
-            height: 50,
-            child: SearchBar(
-              leading: Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: FaIcon(
-                  FontAwesomeIcons.magnifyingGlass,
-                  color: Colors.black38,
-                ),
+          //SearchBar************************************************************
+          InkWell(
+            onTap: () {},
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black26, width: 2),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
-              elevation: MaterialStatePropertyAll(0),
-              hintStyle: MaterialStatePropertyAll(
-                TextStyle(color: Colors.black26, fontSize: 15),
-              ),
-              hintText: 'Search Product',
-              shape: MaterialStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  side: BorderSide(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.search,
                     color: Colors.black26,
-                    width: 2,
                   ),
-                ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Search Product',
+                    style: TextStyle(color: Colors.black26, fontSize: 15),
+                  ),
+                ],
               ),
             ),
-          ),
+          )
         ],
       ),
     );
