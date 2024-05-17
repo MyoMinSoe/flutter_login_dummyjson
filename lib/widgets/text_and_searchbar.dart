@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_login_dummyjson/model/login_model.dart';
 import 'package:flutter_login_dummyjson/screen/search_screen.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TextAndSearchBar extends StatefulWidget {
   final LoginModel? myLoginModel;
@@ -33,7 +30,10 @@ class _TextAndSearchBarState extends State<TextAndSearchBar> {
           ),
           //SearchBar************************************************************
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (c) => SearchScreen()));
+            },
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(

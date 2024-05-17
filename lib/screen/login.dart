@@ -159,7 +159,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               ],
             ),
           ),
-//Join With and Social Icons**************************************
+          //Join With and Social Icons**************************************
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

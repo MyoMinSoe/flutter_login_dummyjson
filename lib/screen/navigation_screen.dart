@@ -4,7 +4,6 @@ import 'package:flutter_login_dummyjson/model/login_model.dart';
 import 'package:flutter_login_dummyjson/screen/blank_screen.dart';
 import 'package:flutter_login_dummyjson/widgets/home_widget.dart';
 import 'package:flutter_login_dummyjson/screen/search_screen.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavigationScreen extends StatefulWidget {
   final LoginModel? myLoginModel;
@@ -28,32 +27,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: FaIcon(FontAwesomeIcons.barsStaggered),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            child: Container(
-              width: 60,
-              height: 60,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                    color: const Color.fromARGB(255, 223, 52, 94), width: 2),
-              ),
-              child: Image.network(
-                widget.myLoginModel!.image,
-                width: 30,
-                fit: BoxFit.contain,
-              ),
-            ),
-          )
-        ],
-      ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (value) {
