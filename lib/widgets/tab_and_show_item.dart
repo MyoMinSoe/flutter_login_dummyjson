@@ -113,69 +113,69 @@ class _TabAndShowItemState extends State<TabAndShowItem>
                   ),
                 );
               }
-              return InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (c) =>
-                          DetailProduct(product: productList[index]),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(right: 30),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  // height: MediaQuery.of(context).size.height * 0.2,
+              return Container(
+                margin: const EdgeInsets.only(right: 30),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
+                width: MediaQuery.of(context).size.width * 0.9,
+                // height: MediaQuery.of(context).size.height * 0.2,
 
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.black12,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Up to\n${productList[index].discountPercentage}%\nOff',
-                            style: const TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900,
-                              color: Color.fromARGB(255, 108, 33, 57),
-                            ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.black12,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Up to\n${productList[index].discountPercentage}%\nOff',
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900,
+                            color: Color.fromARGB(255, 108, 33, 57),
                           ),
-                          Image.network(
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (c) =>
+                                    DetailProduct(product: productList[index]),
+                              ),
+                            );
+                          },
+                          child: Image.network(
                             productList[index].images.last,
                             width: MediaQuery.of(context).size.width * 0.5,
                             height: MediaQuery.of(context).size.height * 0.13,
                             fit: BoxFit.contain,
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Spacer(),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3)),
-                              textStyle: const TextStyle(fontSize: 15),
-                              backgroundColor:
-                                  const Color.fromARGB(255, 223, 52, 94),
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                            ),
-                            onPressed: () {},
-                            child: const Text('Shop Now'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(3)),
+                            textStyle: const TextStyle(fontSize: 15),
+                            backgroundColor:
+                                const Color.fromARGB(255, 223, 52, 94),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
                           ),
-                        ],
-                      )
-                    ],
-                  ),
+                          onPressed: () {},
+                          child: const Text('Shop Now'),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               );
             },
