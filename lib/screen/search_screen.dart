@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_dummyjson/model/product_model.dart';
+import 'package:flutter_login_dummyjson/service/api_service.dart';
+import 'package:flutter_login_dummyjson/utility/search_product.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -24,7 +27,24 @@ class SearchScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                List<ProductElement> productElement = [];
+                int skip = 0;
+                Product? product = await getAllProduct(skip);
+                while (productElement.length != product!.total) {
+                  var temp = product.products;
+                  productElement.addAll(temp);
+                  skip += 30;
+                  product = await getAllProduct(skip);
+                }
+                print('TOTAL PRODUCT : ${product.total}');
+                print('PRODUCT ELEMENT LENGTH IS : ${productElement.length}');
+
+                showSearch(
+                  context: context,
+                  delegate: SearchProduct(productElementList: productElement),
+                );
+              },
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(

@@ -17,10 +17,11 @@ class DetailProduct extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Container(),
               Stack(
                 children: [
                   Image.network(
@@ -29,9 +30,11 @@ class DetailProduct extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                   Positioned(
-                    bottom: 0,
+                    top: 0,
+                    left: 0,
                     child: Container(
-                      color: Colors.black,
+                      padding: const EdgeInsets.all(5),
+                      color: const Color.fromARGB(255, 223, 52, 94),
                       child: Text(
                         'ID : ${product.id.toString()}',
                         style: const TextStyle(
@@ -40,9 +43,10 @@ class DetailProduct extends StatelessWidget {
                             fontSize: 20),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
+              //Title************************************
               Text(
                 product.title,
                 style: const TextStyle(
@@ -51,33 +55,68 @@ class DetailProduct extends StatelessWidget {
                     fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 10),
-              Row(
-                children: [
-                  Text(
-                    '${product.brand} Co.,Ltd',
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 31, 14, 75),
-                        fontSize: 25,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const Spacer(),
-                  Text(
-                    product.category.toUpperCase(),
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 223, 52, 94),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800),
-                  ),
-                ],
-              ),
-              Text(
-                product.description,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+              //Brand and Category*************************
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 223, 52, 94),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          product.brand,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const Spacer()
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Spacer(),
+                        const Text(
+                          'Category - ',
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Color.fromARGB(255, 108, 33, 57),
+                          ),
+                        ),
+                        Text(
+                          product.category.toUpperCase(),
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 108, 33, 57),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
+              //Description***************************************************
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  product.description,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Container(
+                height: 2,
+                color: const Color.fromARGB(255, 223, 52, 94),
+              ),
+              //Rating**********************************************************
               Row(
                 children: [
                   const Spacer(),
@@ -102,23 +141,73 @@ class DetailProduct extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.discount,
-                    size: 50,
+              const SizedBox(height: 30),
+              //DiscountPercentage and Price***********************************
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 223, 52, 94),
+                  border: Border.all(
+                    color: Colors.amber,
+                    width: 5,
                   ),
-                  Text(
-                    '${product.discountPercentage.toString()}% Discount',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 223, 52, 94),
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.discount,
+                          size: 70,
+                          color: Colors.amber,
+                        ),
+                        Text(
+                          '${product.discountPercentage.toString()}% Discount',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    Text(
+                      '\$${product.price.toString()}',
+                      style: const TextStyle(
+                        color: Colors.amber,
+                        fontSize: 60,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    )
+                  ],
+                ),
               ),
+              const SizedBox(height: 20),
+              //Stock********************************************************
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Availiable 👉',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    const Spacer(),
+                    const Icon(
+                      Icons.shopping_cart_sharp,
+                      size: 40,
+                    ),
+                    Text(
+                      '(${product.stock.toString()})',
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                  ],
+                ),
+              ),
+              //Images[]********************************************************
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: 300,
@@ -126,9 +215,12 @@ class DetailProduct extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: product.images.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Image.network(
-                      product.images[index],
-                      width: MediaQuery.of(context).size.width * 0.7,
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Image.network(
+                        product.images[index],
+                        width: MediaQuery.of(context).size.width * 0.7,
+                      ),
                     );
                   },
                 ),

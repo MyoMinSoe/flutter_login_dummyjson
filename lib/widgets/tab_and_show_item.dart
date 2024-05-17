@@ -69,11 +69,6 @@ class _TabAndShowItemState extends State<TabAndShowItem>
   }
 
   bool isFavourite = false;
-  Icon favouriteIcon = const Icon(
-    Icons.favorite_outline,
-    color: Colors.black38,
-    size: 25,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -213,82 +208,92 @@ class _TabAndShowItemState extends State<TabAndShowItem>
                   ),
                 );
               }
-              return Container(
-                margin: const EdgeInsets.only(right: 25),
-                height: MediaQuery.of(context).size.height * 0.3,
-                width: MediaQuery.of(context).size.width * 0.45,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.black12,
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (c) =>
+                          DetailProduct(product: productList[index]),
+                    ),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 25),
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.black12,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    if (isFavourite == false) {
+                                      isFavourite == true;
+                                    } else if (isFavourite == true) {
+                                      isFavourite == false;
+                                    }
+                                    if (mounted) {
+                                      setState(() {});
+                                    }
+                                  },
+                                  icon: isFavourite
+                                      ? const Icon(
+                                          Icons.favorite,
+                                          color:
+                                              Color.fromARGB(255, 223, 52, 94),
+                                          size: 25,
+                                        )
+                                      : const Icon(
+                                          Icons.favorite_outline,
+                                          color: Colors.black38,
+                                          size: 25,
+                                        ),
+                                ),
+                              ],
+                            ),
+                            Image.network(
+                              productList[index].thumbnail,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.12,
+                              fit: BoxFit.fitWidth,
+                            )
+                          ],
+                        ),
                       ),
-                      child: Column(
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  if (isFavourite == false) {
-                                    isFavourite == true;
-                                    favouriteIcon = const Icon(
-                                      Icons.favorite,
-                                      color: Color.fromARGB(255, 223, 52, 94),
-                                      size: 25,
-                                    );
-                                  } else if (isFavourite == true) {
-                                    isFavourite == false;
-                                    favouriteIcon = const Icon(
-                                      Icons.favorite_outline,
-                                      color: Colors.black38,
-                                      size: 25,
-                                    );
-                                  }
-                                  if (mounted) {
-                                    setState(() {});
-                                  }
-                                  setState(() {});
-                                },
-                                icon: favouriteIcon,
-                              ),
-                            ],
+                          Text(
+                            productList[index].brand,
+                            style: const TextStyle(fontSize: 15),
                           ),
-                          Image.network(
-                            productList[index].thumbnail,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.12,
-                            fit: BoxFit.fitWidth,
-                          )
+                          const Spacer()
                         ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          productList[index].brand,
-                          style: const TextStyle(fontSize: 15),
-                        ),
-                        const Spacer()
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '\$${productList[index].price}',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                      Row(
+                        children: [
+                          Text(
+                            '\$${productList[index].price}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ],
+                          const Spacer(),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
