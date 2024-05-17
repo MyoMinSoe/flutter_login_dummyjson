@@ -82,7 +82,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       controller: username,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   Column(
                     children: [
                       SizedBox(
