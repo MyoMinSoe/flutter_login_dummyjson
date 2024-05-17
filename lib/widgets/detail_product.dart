@@ -207,6 +207,7 @@ class DetailProduct extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 10),
               //Images[]********************************************************
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
