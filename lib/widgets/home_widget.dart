@@ -44,14 +44,12 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextAndSearchBar(myLoginModel: widget.loginModel),
-              const SizedBox(height: 10),
-              const TabAndShowItem(),
-            ],
-          ),
+        child: Column(
+          children: [
+            TextAndSearchBar(myLoginModel: widget.loginModel),
+            const SizedBox(height: 10),
+            const TabAndShowItem(),
+          ],
         ),
       ),
     );
