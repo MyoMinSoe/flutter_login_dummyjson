@@ -127,6 +127,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 30),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       textStyle: const TextStyle(
