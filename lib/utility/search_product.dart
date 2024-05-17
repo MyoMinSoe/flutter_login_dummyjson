@@ -44,52 +44,61 @@ class SearchProduct extends SearchDelegate {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Found ${searchProductElement.length.toString()} items',
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            'Found ${searchProductElement.length.toString()} Items',
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 10),
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
+                mainAxisExtent: 300,
               ),
+              padding: const EdgeInsets.only(bottom: 10),
               itemCount: searchProductElement.length,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (c) => DetailProduct(
-                              product: searchProductElement[index]),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (c) =>
+                            DetailProduct(product: searchProductElement[index]),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: const BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                      );
-                    },
-                    child: Container(
-                      color: Colors.amber,
-                      width: 150,
-                      height: 300,
-                      child: Column(
-                        children: [
-                          const Row(
-                            children: [
-                              Spacer(),
-                              Icon(Icons.favorite_outline),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 130,
-                            height: 200,
-                            child: Image.network(
+                        child: Column(
+                          children: [
+                            const Row(
+                              children: [
+                                Spacer(),
+                                Icon(Icons.favorite_outline),
+                              ],
+                            ),
+                            Image.network(
                               searchProductElement[index].thumbnail,
                               fit: BoxFit.contain,
+                              height: 200,
                             ),
-                          ),
-                          Text(searchProductElement[index].brand),
-                          Text('\$ ${productElementList[index].price}')
-                        ],
+                          ],
+                        ),
                       ),
-                    ));
+                      const Spacer(),
+                      Text(searchProductElement[index].brand),
+                      Text('\$ ${productElementList[index].price}')
+                    ],
+                  ),
+                );
               },
             ),
           ),
@@ -105,64 +114,67 @@ class SearchProduct extends SearchDelegate {
             element.title.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
-    return query.isEmpty
-        ? const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text('no data found'))
-        : Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Found ${searchProductElement.length.toString()} items',
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 600,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                    ),
-                    itemCount: searchProductElement.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (c) => DetailProduct(
-                                  product: searchProductElement[index]),
-                            ),
-                          );
-                        },
-                        child: Container(
-                            color: Colors.amber,
-                            width: 200,
-                            height: 300,
-                            child: ListView(children: [
-                              Icon(Icons.favorite),
-                              SizedBox(
-                                height: 200,
-                                child: Image.network(
-                                  width: 100,
-                                  height: 100,
-                                  searchProductElement[index].thumbnail,
-                                ),
-                              ),
-                              Text(searchProductElement[index].brand),
-                              Text('\$${searchProductElement[index].price}')
-                            ])),
-                      );
-                    },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: Expanded(
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            mainAxisExtent: 300,
+          ),
+          padding: const EdgeInsets.only(bottom: 10),
+          itemCount: searchProductElement.length,
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (c) =>
+                        DetailProduct(product: searchProductElement[index]),
                   ),
-                ),
-              ],
-            ),
-          );
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Column(
+                      children: [
+                        const Row(
+                          children: [
+                            Spacer(),
+                            Icon(Icons.favorite_outline),
+                          ],
+                        ),
+                        Image.network(
+                          searchProductElement[index].thumbnail,
+                          fit: BoxFit.contain,
+                          height: 200,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(searchProductElement[index].title),
+                  Text(
+                    '\$ ${productElementList[index].price}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
