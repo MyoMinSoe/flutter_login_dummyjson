@@ -96,7 +96,7 @@ class _TabAndShowItemState extends State<TabAndShowItem>
             Tab(text: 'Crocs'),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         //Up to 50% Off and Item//******************************************************
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.21,
@@ -181,7 +181,7 @@ class _TabAndShowItemState extends State<TabAndShowItem>
             },
           ),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         //Recommended For You and Items//***********************************************
         const Row(
           children: [

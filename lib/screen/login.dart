@@ -82,6 +82,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       controller: username,
                     ),
                   ),
+                  const SizedBox(height: 30),
                   Column(
                     children: [
                       SizedBox(
@@ -127,7 +128,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       textStyle: const TextStyle(
