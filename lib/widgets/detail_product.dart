@@ -67,7 +67,7 @@ class DetailProduct extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          product.brand,
+                          product.brand ?? 'no brand',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 25,

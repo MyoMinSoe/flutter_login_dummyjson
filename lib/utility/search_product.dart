@@ -100,7 +100,8 @@ class SearchProduct extends SearchDelegate {
                               ),
                             ),
                             const Spacer(),
-                            Text(searchProductElement[index].brand),
+                            Text(searchProductElement[index].brand ??
+                                'no brand'),
                             Text('\$ ${searchProductElement[index].price}')
                           ],
                         ),

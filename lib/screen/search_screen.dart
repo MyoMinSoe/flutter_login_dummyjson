@@ -37,8 +37,8 @@ class SearchScreen extends StatelessWidget {
                   skip += 30;
                   product = await getAllProduct(skip);
                 }
-                print('TOTAL PRODUCT : ${product.total}');
-                print('PRODUCT ELEMENT LENGTH IS : ${productElement.length}');
+                // print('TOTAL PRODUCT : ${product.total}');
+                // print('PRODUCT ELEMENT LENGTH IS : ${productElement.length}');
 
                 showSearch(
                   context: context,

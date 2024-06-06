@@ -31,8 +31,8 @@ class _TextAndSearchBarState extends State<TextAndSearchBar> {
           //SearchBar************************************************************
           InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (c) => SearchScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (c) => const SearchScreen()));
             },
             child: Container(
               alignment: Alignment.center,

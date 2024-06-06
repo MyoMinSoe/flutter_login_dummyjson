@@ -138,21 +138,11 @@ class _TabAndShowItemState extends State<TabAndShowItem>
                             color: Color.fromARGB(255, 108, 33, 57),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (c) =>
-                                    DetailProduct(product: productList[index]),
-                              ),
-                            );
-                          },
-                          child: Image.network(
-                            productList[index].images.last,
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            height: MediaQuery.of(context).size.height * 0.13,
-                            fit: BoxFit.contain,
-                          ),
+                        Image.network(
+                          productList[index].images.last,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.13,
+                          fit: BoxFit.contain,
                         ),
                       ],
                     ),
@@ -170,7 +160,14 @@ class _TabAndShowItemState extends State<TabAndShowItem>
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (c) =>
+                                    DetailProduct(product: productList[index]),
+                              ),
+                            );
+                          },
                           child: const Text('Shop Now'),
                         ),
                       ],
@@ -276,7 +273,7 @@ class _TabAndShowItemState extends State<TabAndShowItem>
                     Row(
                       children: [
                         Text(
-                          productList[index].brand,
+                          productList[index].brand ?? "no brand",
                           style: const TextStyle(fontSize: 15),
                         ),
                         const Spacer()

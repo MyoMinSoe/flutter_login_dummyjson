@@ -71,7 +71,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     width: 250,
                     child: TextField(
                       onTap: () {
-                        username.text = 'flesslie2q';
+                        username.text = 'levih';
                       },
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.mail_outline,
@@ -89,7 +89,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         width: 250,
                         child: TextField(
                           onTap: () {
-                            password.text = 'XUKU613LscMS';
+                            password.text = 'levihpass';
                           },
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock_outline,
