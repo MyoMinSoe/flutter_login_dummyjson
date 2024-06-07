@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_login_dummyjson/screen/navigation_screen.dart';
 import 'package:flutter_login_dummyjson/service/api_service.dart';
 import 'package:flutter_login_dummyjson/utility/my_shared_preference.dart';
@@ -18,11 +16,17 @@ class _LoginWidgetState extends State<LoginWidget> {
   final username = TextEditingController();
   final password = TextEditingController();
 
+  bool passwordVisibility = true;
+  void showHidePassword() {
+    passwordVisibility = !passwordVisibility;
+    setState(() {});
+  }
+
   @override
-  void initState() {
-    super.initState();
-    // username.text = 'flesslie2q';
-    // password.text = 'XUKU613LscMS';
+  void dispose() {
+    super.dispose();
+    username.dispose();
+    password.dispose();
   }
 
   @override
@@ -88,16 +92,24 @@ class _LoginWidgetState extends State<LoginWidget> {
                       SizedBox(
                         width: 250,
                         child: TextField(
+                          controller: password,
                           onTap: () {
                             password.text = 'levihpass';
                           },
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.lock_outline,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: passwordVisibility,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.lock_outline,
                                 size: 30, color: Colors.grey),
                             hintText: 'Enter Your Password',
-                            hintStyle: TextStyle(color: Colors.grey),
+                            hintStyle: const TextStyle(color: Colors.grey),
+                            suffixIcon: IconButton(
+                              onPressed: showHidePassword,
+                              icon: passwordVisibility
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                            ),
                           ),
-                          controller: password,
                         ),
                       ),
                       const SizedBox(height: 10),
